@@ -1,5 +1,6 @@
-// Write a java program which accept N numbers from user and display all such elements which are even and divisible by 5
+// write a java program which accept number from user and retrun the count of odd digits
 
+import java.io.OutputStream;
 import java.util.*;
 
 public class Program3
@@ -8,44 +9,35 @@ public class Program3
     {
         Scanner sobj = new Scanner(System.in);
 
-        System.out.println("Enter the size of array : ");
-        int iSize = sobj.nextInt();
+        System.out.println("Enter number : ");
+        int num = sobj.nextInt();
 
-        ArrayDemo dobj = new ArrayDemo(iSize);
-        dobj.Accept();
-        dobj.Divisible();
+        Digit dobj = new Digit(num);
+        dobj.OddCount(num);
     }
 }
-
-class ArrayDemo
+class Digit
 {
-   int Arr[];  // Array declaration
-
-   public  ArrayDemo(int iSize)
+   public Digit(int num)
    {
-      Arr = new int[iSize];
+
    }
 
-   void Accept()
+   public void OddCount(int num)
    {
-    Scanner sobj = new Scanner(System.in);
+      int iDigit = 0;
+      int iCount = 0;
 
-    for(int iCnt = 0; iCnt < Arr.length; iCnt++)
-    {
-       Arr[iCnt] = sobj.nextInt();
-    }
-   }
-
-   public void Divisible()
-   {
-      System.out.println("Even alemnts nd divisible by 5 are : ");
-
-      for(int iCnt = 0; iCnt < Arr.length; iCnt++)
+      while(num != 0)
       {
-        if((Arr[iCnt] % 2 == 0)  && (Arr[iCnt] % 5 == 0))
+        iDigit = num % 10;
+        if( iDigit % 2 != 0)
         {
-          System.out.println(Arr[iCnt]);
+            iCount++;
         }
+        num = num / 10;
       }
+
+      System.out.println("The number of odd elements are : "+iCount);
    }
 }

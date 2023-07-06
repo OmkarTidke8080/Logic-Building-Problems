@@ -1,52 +1,39 @@
-// Write a java program which accept N number from user and display all such elements which are divisible by 3 and 5
+// Write a java program which accept number from user and return the multiplication of all digits
 
 import java.util.*;
+
 public class Program4
 {
     public static void main(String args[])
     {
         Scanner sobj = new Scanner(System.in);
 
-        System.out.println("Enter the size of array : ");
-        int iSize = sobj.nextInt();
+        System.out.println("Enter number : ");
+        int num = sobj.nextInt();
 
-        ArrayDemo dobj = new ArrayDemo(iSize);
-        dobj.Accept();
-        dobj.Divisible();
-        
+        Digit dobj = new Digit(num);
+        dobj.multiplication(num);
+
     }
 }
-
-class ArrayDemo
+class Digit
 {
-    int Arr[];
-
-    public ArrayDemo(int iSize)
+    public Digit(int num)
     {
-        Arr = new int[iSize];
+
     }
 
-    void Accept()
+    public void multiplication(int num)
     {
-        Scanner sobj = new Scanner(System.in);
+       int iMult = 1;
+       int iDigit = 1;
 
-        System.out.println("Enter the elements of array : ");
-        for(int iCnt = 0; iCnt < Arr.length; iCnt++)
-        {
-          Arr[iCnt] = sobj.nextInt();
-        }
-    }
-
-    public void Divisible()
-    {
-        System.out.println("The elements which are dividible by 3 and 5 are : ");
-
-        for(int iCnt = 0; iCnt < Arr.length; iCnt++)
-        {
-            if( (Arr[iCnt] % 3 == 0) && (Arr[iCnt] % 5 == 0))
-            {
-                System.out.println(Arr[iCnt]);
-            }
-        }
+       while(num != 0)
+       {
+          iDigit = num % 10;
+          iMult = iMult * iDigit;
+          num = num / 10;
+       }
+       System.out.println("The multiplication of digits is : "+iMult);
     }
 }

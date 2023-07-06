@@ -1,57 +1,52 @@
-// write a java program which accept N numbers from user and display all such eleemnst which are multiples of 11
-
+// write a java program which accept number from user and return differnce between summation of even digits and summation of odd digits
 
 import java.util.*;
 
-import javax.xml.transform.Source;
 
 public class Program5
 {
     public static void main(String args[])
     {
-       Scanner sobj = new Scanner(System.in);
-       
-       System.out.println("Enter the size of array : ");
-       int iSize = sobj.nextInt();
+        Scanner sobj = new Scanner(System.in);
 
-       ArrayDemo dobj = new ArrayDemo(iSize);
-       dobj.Accept();
-       dobj.divisible();
+        System.out.println("Enter number : ");
+        int num = sobj.nextInt();
 
+        Digit dobj = new Digit(num);
 
+         dobj.CountDiff(num);
     }
 }
-
-class ArrayDemo
+class Digit
 {
-  int Arr[];
-
-  public ArrayDemo(int iSize)
-  {
-    Arr = new int[iSize];
-  }
-
-  public void Accept()
-  {
-    Scanner sobj = new Scanner(System.in);
-
-    System.out.println("Enter the elements of array : ");
-    for(int iCnt = 0; iCnt < Arr.length; iCnt++)
+    public Digit(int num)
     {
-       Arr[iCnt] = sobj.nextInt();
+
     }
-  }
 
-  public void divisible()
-  {
-     System.out.println("Elements which are multiples of 11 are : ");
+    public void CountDiff(int num)
+    {
+      int iDigit = 0;
+      int Diff = 0;
+      int EvenSum = 0;
+      int OddSum = 0;
 
-     for(int iCnt = 0; iCnt < Arr.length; iCnt ++)
-     {
-        if(Arr[iCnt] % 11 == 0)
+      while(num != 0)
+      {
+        iDigit = num % 10;
+        if(iDigit % 2 == 0)
         {
-            System.out.println(Arr[iCnt]);
+            EvenSum = EvenSum + iDigit;
         }
-     }
-  }
+        else if(iDigit % 2 != 0)
+        {
+            OddSum = OddSum + iDigit;
+        }
+        num = num / 10;
+      }
+
+         Diff = EvenSum - OddSum;
+
+         System.out.println("Diiference is : "+Diff);
+    }
 }

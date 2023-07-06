@@ -1,81 +1,45 @@
-// write a java program which accept N numbers rom user and return thw diffrence between summation of even elements and summation of odd elements
+// Write a java program which accept number from user and return the count of even digits
 
 import java.util.*;
 
-import javax.sound.sampled.SourceDataLine;
-
 public class Program1
 {
-    public static void main(String args[])
+    public static void main(String arg[])
     {
         Scanner sobj = new Scanner(System.in);
+       
+        System.out.println("Enter the number : ");
+        int num = sobj.nextInt();
 
-        System.out.println("Enter the size of array");
-        int iSize = sobj.nextInt();
-
-        ArrayDemo aobj = new ArrayDemo(iSize);
-        aobj.Accept();
-        aobj.diffrence();
+        Digit dobj = new Digit(num);
+        dobj.CountEven(num);
     }
 }
 
-class ArrayDemo
+class Digit
 {
-    public int Arr[];  // array declaration
-
-   public ArrayDemo(int iSize)  //  constructor with same name as class
+   public Digit(int num)
    {
-      Arr = new int[iSize]; // array memory allocation
-   }
-   
-   public void Accept()
-   {
-    Scanner sobj = new Scanner(System.in); //  scanner object to receive Array elements
-
-    System.out.println("Enter the array elements : ");
-
-    // for loop to accept elements
-    for(int iCnt = 0; iCnt < Arr.length; iCnt++)
-    {
-        Arr[iCnt] = sobj.nextInt();
-    }
-   }
-
-    public void diffrence()
-    {
-        int EvenSum = 0;
-        int OddSum = 0;
-        int Diff = 0;
-
-
-        for(int iCnt = 0; iCnt < Arr.length; iCnt++)
-        {
-            if(Arr[iCnt] % 2 == 0)
-            {
-                EvenSum = EvenSum + Arr[iCnt];            
-            }
-            else if(Arr[iCnt] % 2 != 0)
-            {
-                OddSum = OddSum + Arr[iCnt];
-            }
-        }
-        System.out.println("Sum of even elements is : "+EvenSum);
-        System.out.println("Sum of Odd elements : "+OddSum);
-        Diff = EvenSum - OddSum;
-
-        System.out.println("Differnece between Even and Odd elements : "+Diff);
-
-    }
-
-    
-
-   
-     
-
-
       
+   }
 
-    
+   public void CountEven(int num)
+   {
+      int iCount = 0;
+      int iDigit = 0;
 
+
+      while(num != 0)
+      {
+          iDigit = num % 10;
+          if(iDigit % 2 == 0)
+          {
+            iCount++;
+          }
+        num = num / 10;
+      }
+
+      System.out.println("The number of even digits are : "+iCount);
+   }
 
 }
