@@ -1,88 +1,40 @@
-// Write a program which displays product of all elements from singly linear linked list
+// Write aprogram which accept file name from user and read all data from that file and display it on the scree
 
 #include<stdio.h>
+#include<fcntl.h>
 #include<stdlib.h>
+#include<string.h>
+#include<unistd.h>
 
-typedef struct Node NODE;
-typedef struct Node *PNODE;
-typedef struct Node **PPNODE;
-
-struct Node
+int main(int argc, char *argv[])
 {
-    int Data;
-    NODE *Next;
-};
+    int fd = 0;
+    int Ret = 0;
+    char *Buffer = NULL;
 
-void InsertFirst(PPNODE Head, int no)
-{
-    PNODE newn = NULL;
-    newn = (PNODE)malloc(sizeof(NODE));
-
-    newn->Data = no;
-    newn->Next = NULL;
-
-    if(*Head == NULL)
+    if(argc != 3)
     {
-        *Head = newn;
+        printf("Insufficient arguments\n");
+        return -1;
     }
-    else
+
+    fd = open(argv[1], O_RDONLY);
+    if(fd == -1)
     {
-        newn->Next = *Head;
-        *Head = newn;
+        printf("Unable to open file\n");
+        return -1;
     }
-}
 
-void Display(PNODE Head)
-{
-    printf("ELements of linked list are : \n");
+    Buffer = (char *)malloc(sizeof(atoi(argv[2])));
 
-    while(Head != NULL)
+    Ret = read(fd,Buffer,atoi(argv[2]));
+    if(Ret == 0)
     {
-        printf("| %d | -> ",Head->Data);
-        Head = Head -> Next;      
+        printf("Unable to read data from file\n");
+        return -1;
     }
+
+    printf("Data from file is : %s\n",Buffer);
+
+    return 0;
 }
-
-void DigitProduct(PNODE Head)
-{
-    int iDigit = 1;
-    int Product = 1;
-
-    while(Head != NULL)
-    {
-        int iNo = Head -> Data;
-        while(iNo != 0)
-        {
-            iDigit = iNo % 10;
-            iNo = iNo/10;      
-             Product = Product*iDigit;
-        }
-        //iNo = 1;
-        Head = Head -> Next;
-
-        printf("The Product of Digits is : %d\n",Product);
-
-    }
-}
-
-int main()
-{
-    PNODE First = NULL;
-    int iRet = 0;
-
-    InsertFirst(&First,111);
-    InsertFirst(&First,16);
-    InsertFirst(&First,414);
-    InsertFirst(&First,11);
-
-    Display(First);
-    
-    DigitProduct(First);
-
-    
-
-
-}
-
-
-

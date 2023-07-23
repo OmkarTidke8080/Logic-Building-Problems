@@ -1,45 +1,53 @@
-// Write a java program which accept number from user and return the count of even digits
+// write  a program which accept number form user and display the below pattern
 
-import java.util.*;
+/*
+ input : 7846
 
-public class Program1
-{
-    public static void main(String arg[])
+ output :       6  4  8  7
+                6  4  8  7
+                6  4  8  7
+                6  4  8  7
+ */
+
+ import java.util.*;
+
+ public class Program1
+ {
+    public static void main(String args[])
     {
-        Scanner sobj = new Scanner(System.in);
-       
-        System.out.println("Enter the number : ");
-        int num = sobj.nextInt();
-
-        Digit dobj = new Digit(num);
-        dobj.CountEven(num);
+      MyArray mobj = new MyArray();
+      mobj.Pattern();
     }
-}
+ }
+ class MyArray
+ {
+    void Pattern()
+    {
+       Scanner sobj = new Scanner(System.in);
 
-class Digit
-{
-   public Digit(int num)
-   {
-      
-   }
+       System.out.println("Enter the Number : ");
+       int num = sobj.nextInt();
 
-   public void CountEven(int num)
-   {
-      int iCount = 0;
-      int iDigit = 0;
+       System.out.println("Enter the number of  Rows : ");
+       int iRow = sobj.nextInt();
 
+       int iDigit = 0;
+       int reverse = 0;
 
-      while(num != 0)
-      {
-          iDigit = num % 10;
-          if(iDigit % 2 == 0)
-          {
-            iCount++;
-          }
+       while(num != 0)
+       {
+        iDigit = num % 10;
+        reverse = (reverse * 10) + iDigit;
         num = num / 10;
-      }
+       }
+         
+       for(int i = 0; i < iRow; i++)
+       {
+          System.out.println(reverse+"\t");
+       }
+       
 
-      System.out.println("The number of even digits are : "+iCount);
-   }
 
-}
+
+    }
+ }

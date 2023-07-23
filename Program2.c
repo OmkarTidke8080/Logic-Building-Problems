@@ -1,97 +1,37 @@
-// Write a progam which returns the palindrome numbers in the singly linear linked list
+// write a program which accept file name from user and create that file
 
 #include<stdio.h>
+#include<fcntl.h>
 #include<stdlib.h>
+#include<string.h>
+#include<unistd.h>
 
-typedef struct Node NODE;
-typedef struct Node *PNODE;
-typedef struct Node **PPNODE;
 
-struct Node
+int main(int argc, char * argv[])
 {
-    int Data;
-    NODE *Next;
-};
+  
+  int fd = 0;
 
-void InsertFirst(PPNODE Head, int no)
-{
-    PNODE newn = NULL;
-    newn = (PNODE)malloc(sizeof(NODE));
+  if(argc != 2)
+  {
+    printf("Insuffiecint arguments : ");
+    return -1;
+  }
 
-    newn->Data = no;
-    newn->Next = NULL;
+  fd = creat(argv[1],O_RDONLY);
+  if(fd == -1)
+  {
+    printf("Unable to open file\n");
+  }
+  else
+  {
+    printf("FIle created succesfully \n");
+  }
 
-    if(*Head == NULL)
-    {
-        *Head = newn;
-    }
-    else
-    {
-        newn->Next = *Head;
-        *Head = newn;
-    }
+
+
+
+
+
+    return 0;
 }
-
-void Display(PNODE Head)
-{
-    printf("ELements of linked list are : \n");
-
-    while(Head != NULL)
-    {
-        printf("| %d | -> ",Head->Data);
-        Head = Head -> Next;      
-    }
-}
-
-void Palindrome(PNODE Head)
-{
-    int iDigit = 0;
-    int iReverse = 0;
-
-    while(Head != NULL)
-    {
-        int iNo = Head -> Data;
-        int Temp = iNo;
-
-        while(iNo != 0)
-        {
-            iDigit = iNo % 10;
-            iReverse = (iReverse*10)+iDigit;
-            iNo = iNo / 10;      
-        }
-        if(iReverse == Temp)
-            {
-                printf("%d",Temp);          
-            }
-            else
-            {
-                break;
-            }
-        iNo = 0;
-
-        Head = Head -> Next;
-        
-    }
-}
-
-int main()
-{
-    PNODE First = NULL;
-    int iRet = 0;
-
-    InsertFirst(&First,111);
-    InsertFirst(&First,51);
-    InsertFirst(&First,414);
-    InsertFirst(&First,11);
-
-    Display(First);
-    
-    Palindrome(First);
-
-    
-
-
-}
-
-
-

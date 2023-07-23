@@ -1,43 +1,35 @@
-// write a java program which accept number from user and retrun the count of odd digits
+// write  a program which accept number form user and display the below pattern
 
-import java.io.OutputStream;
+/*
+ input : 7846
+
+ output :       7  8  4  6
+                7  8  4  
+                7  8  
+                7  
+ */
+
 import java.util.*;
 
-public class Program3
-{
-    public static void main(String args[])
-    {
-        Scanner sobj = new Scanner(System.in);
+public class Program3 {
 
-        System.out.println("Enter number : ");
-        int num = sobj.nextInt();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the length of the array: ");
+        int n = sc.nextInt();
 
-        Digit dobj = new Digit(num);
-        dobj.OddCount(num);
-    }
-}
-class Digit
-{
-   public Digit(int num)
-   {
-
-   }
-
-   public void OddCount(int num)
-   {
-      int iDigit = 0;
-      int iCount = 0;
-
-      while(num != 0)
-      {
-        iDigit = num % 10;
-        if( iDigit % 2 != 0)
-        {
-            iCount++;
+        System.out.println("Enter the array");
+        int Arr[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            Arr[i] = sc.nextInt();
         }
-        num = num / 10;
-      }
-
-      System.out.println("The number of odd elements are : "+iCount);
-   }
+        for (int i = 0; i < n; i++) {
+            int k = 0;
+            for (int j = 0; j < (n - i); j++) {
+                System.out.print(Arr[k] + "\t");
+                k++;
+            }
+            System.out.println();
+ }
+}
 }

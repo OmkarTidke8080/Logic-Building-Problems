@@ -1,86 +1,37 @@
-// Write a progam which reverse each element of singly linear linked list
+// Write a program which accept file name from user and open that file in read mode
 
 #include<stdio.h>
+#include<fcntl.h>
 #include<stdlib.h>
+#include<string.h>
+#include<unistd.h>
 
-typedef struct Node NODE;
-typedef struct Node *PNODE;
-typedef struct Node **PPNODE;
 
-struct Node
+int main(int argc, char * argv[])
 {
-    int Data;
-    NODE *Next;
-};
+  
+  int fd = 0;
 
-void InsertFirst(PPNODE Head, int no)
-{
-    PNODE newn = NULL;
-    newn = (PNODE)malloc(sizeof(NODE));
+  if(argc != 2)
+  {
+    printf("Insuffiecint arguments : ");
+    return -1;
+  }
 
-    newn->Data = no;
-    newn->Next = NULL;
+  fd = open(argv[1],O_RDONLY);
+  if(fd == -1)
+  {
+    printf("Unable to open file\n");
+  }
+  else
+  {
+    printf("FIle opened succesfully \n");
+  }
 
-    if(*Head == NULL)
-    {
-        *Head = newn;
-    }
-    else
-    {
-        newn->Next = *Head;
-        *Head = newn;
-    }
+
+
+
+
+
+    return 0;
 }
-
-void Display(PNODE Head)
-{
-    printf("ELements of linked list are : \n");
-
-    while(Head != NULL)
-    {
-        printf("| %d | -> ",Head->Data);
-        Head = Head -> Next;      
-    }
-}
-
-void ReverseDigits(PNODE Head)
-{
-    int iDigit = 0;
-    int iReverse = 0;
-
-    while(Head != NULL)
-    {
-        int iNo = Head->Data;
-
-        while(iNo != 0)
-        {
-     
-        iDigit = iNo % 10;
-        iReverse = (iReverse * 10) + iDigit;
-        iNo = iNo / 10;
-        }
-        printf("Reverse numbers is %d : \n",iReverse);
-
-        iNo = 0;
-        Head = Head -> Next;
-    }
-}
-
-int main()
-{
-    PNODE First = NULL;
-    int iRet = 0;
-
-    InsertFirst(&First,111);
-    InsertFirst(&First,51);
-    InsertFirst(&First,21);
-    InsertFirst(&First,11);
-
-    Display(First);
-    
-    ReverseDigits(First);
-
-}
-
-
-
